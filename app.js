@@ -1,7 +1,8 @@
 $(function(){
 
 	var WorkoutLog = (function($, undefined){
-		var API_BASE = "https://simonkwondo.herokuapp.com/api/";
+		//var API_BASE = "https://simonkwondo.herokuapp.com/api/";
+      var API_BASE = 'http://localhost:3000/api/';
 		var userDefinitions = [];
 
 		var setAuthHeader = function(sessionToken) {

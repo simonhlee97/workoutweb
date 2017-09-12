@@ -20,6 +20,9 @@ $(function() {
 					WorkoutLog.definition.userDefinitions.push(data.definition);
 					$("#def-description").val("");
 					$("#def-logtype").val("");
+					var calBurned = data.definition.logType * 111;
+					console.log(data.definition.logType);
+					$('#logresult').html(calBurned);
 					$('a[href="#log"]').tab("show");
 				});
 
