@@ -11,7 +11,8 @@
 		<style>
 		body{
 			width: 97%;
-			margin: 5px auto;
+			
+			padding-left: 7em;
 		}
 		  	.slidecontainer {
 			    width: 70%;
@@ -50,17 +51,17 @@
 			#define, #log {
 				width: 40%;
 			}
-			
-			
 		</style>
 	</head>
 	<body>
 		<ul class="nav nav-tabs">
-			<li><a href="#home" id="loginout" class="disabled" data-toggle="tab">Login</a></li>
+			<!-- <li><a href="#home" id="loginout" class="disabled" data-toggle="tab">Login</a></li> -->
 			<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
 			<li><a href="#define" data-toggle="tab">Enter New Run</a></li>
 			<li><a href="#log" data-toggle="tab">Your Data</a></li>
 			<li><a href="#history" data-toggle="tab">History</a></li>
+			<li><a href="#account" data-toggle="tab">Account Settings</a></li>
+			<li><a href="#logout" data-toggle="tab">Logout</a></li>
 			<a href="#update-log" data-toggle="tab" class="disabled" type="hidden"></a>
 		</ul>
 
@@ -78,27 +79,26 @@
 						<button class="btn btn-primary">Logout</button>
 					</div>
 				</div>
+
+
 				<div class="tab-pane fade" id="define">
 					<h2>Enter Run Info</h2>
 					<hr>
-
 					<label for="def-description">Date Of Run (Not supported by Firefox)</label><br>
-					<input id="def-description" type="date">
+					<input id="datepicker" type="date">
 					<br>
 					<hr>
 					<br>
-
 					<label for="def-logtype">How many Miles?</label>
 					<div class="slidecontainer">
-					  <input type="range" min="0.1" max="30.0" value="3.2" step="0.1" class="slider" id="def-logtype">
+					  <input type="range" min="0.1" max="30.0" value="3.2" step="0.1" class="slider" id="sldrMiles">
 					  <p>Miles: <span id="demo1"></span></p>
 					</div>
 					<hr>
 					<br>
-
 					<label for="def-miles">How many Minutes?</label>
 					<div class="slidecontainer">
-					  <input type="range" min="1" max="50" value="5" class="slider" id="minutes">
+					  <input type="range" min="1" max="50" value="5" class="slider" id="sldrMinutes">
 					  <p>Minutes: <span id="demo2"></span></p>
 					</div>
 					<hr>
@@ -106,27 +106,44 @@
 				</div>
 
 				<div class="tab-pane fade" id="log">
-					<h1>Your Results!</h1>
-					<img src="./images/gump2.jpg" alt="Forrest">
-					<h3>Great job! You burned: <span id='logresult'></span> Calories!</h3>
-					<br>
+					<div class="row">
+						<div class="col-md-1">
+							<p></p>
+						</div>
+						<div class="col-md-10">
+							<h2>Great job. Review, add a note, and confirm</h2>
+							<img src="./images/gump2.jpg" alt="Forrest">
+						</div>
+						<div class="col-md-1">
+							<p></p>
+						</div>
+					</div>
+					<div class="row">
+						<h4>You burned <span id='calories'></span> calories!</h4>
+					</div>
+					<div class="row">
+						<h4>Your run date: <span id='date'></span></h4>
+					</div>
+					<div class="row">
+						<h4>Your pace: <span id='pace'></span> miles per hour</h4>
+					</div>
+					</div>
 					
+					<label>Add some notes</label>
 					<br>
-					<label>Find your run's date below:</label>
-					<select class="form-control" id="log-definition"></select>
-					<br><label>Add some notes</label><br>
-					<textarea id="log-description" rows="3" class="form-control"></textarea>
-					<button class="btn btn-primary" id="log-save">Save</button>
+					<textarea id="notes" rows="3" class="form-control"></textarea>
+					<button class="btn btn-primary" id="log-save">Confirm</button>
 				</div>
-
-				<div class="tab-pane fade" id="update-log">
-					<h2>Log Update</h2>
+				
+				<!-- if 'U' (update) is clicked, it will go to this Div -->
+				<div class="tab-pane fade" id="update-log"> 
+					<h2>Update Run Info</h2>
 					<label>Result</label>
 					<input type="hidden" class="form-control" id="update-id" />
 					<input type="text" class="form-control" id="update-result" />
 					<label>Update</label>
 					<select id="update-definition" class="form-control"></select><br>
-					<label>Notes</label>
+					<label>Edit notes</label>
 					<textarea id="update-description" rows="3" class="form-control"></textarea>
 					<br>
 					<button class="btn btn-primary" id="log-update">Save</button>
@@ -138,6 +155,17 @@
 					</ul>
 					<img src="./images/gump3.png" alt="Gump">
 					<h4>Forrest Gump: "Mama says they was my magic shoes. They could take me anywhere."</h4>
+				</div>
+
+				<div class="tab-pane fade" id="account">
+					<h2>Your Account Profile</h2>	
+					<ul>
+						<li>Name (or nickname): {{name}}</li>
+						<li>Current Weight: {{weight}}</li>
+						<li>Sex: {{sex}}</li>
+						<li>Zip Code: {{zip}}</li>
+					</ul>
+					<button class="btn btn-primary" id="editprofile">Edit</button>
 				</div>
 			</div>
 		</div>
@@ -193,8 +221,7 @@
 		<script src="./workouts/log.js"></script>
 		<script>
 
-
-			var slider = document.getElementById("def-logtype");
+			var slider = document.getElementById("sldrMiles");
 			var output = document.getElementById("demo1");
 			output.innerHTML = slider.value;
 
@@ -202,7 +229,7 @@
 			  output.innerHTML = this.value;
 			}
 		
-			var slider2 = document.getElementById("minutes");
+			var slider2 = document.getElementById("sldrMinutes");
 			var output2 = document.getElementById("demo2");
 				output2.innerHTML = slider2.value;
 

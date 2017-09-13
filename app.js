@@ -2,6 +2,7 @@ $(function(){
 
 	var WorkoutLog = (function($, undefined){
 		//var API_BASE = "https://simonkwondo.herokuapp.com/api/";
+         //switch to above for Heroku, below for Local Dev
       var API_BASE = 'http://localhost:3000/api/';
 		var userDefinitions = [];
 

@@ -5,8 +5,9 @@ $(function() {
 
 			create: function(){
 				var def = {
-					desc: $("#def-description").val(),
-					type: $("#def-logtype").val()
+					miles: $("#sldrMiles").val(), //changed to sldrMiles
+					minutes: $("#sldrMinutes").val(),//changed to sldrMinutes
+					runDate: $("#datepicker").val()
 				};
 				var postData = { definition: def };
 				var define = $.ajax({
@@ -18,14 +19,15 @@ $(function() {
 
 				define.done(function(data){
 					WorkoutLog.definition.userDefinitions.push(data.definition);
-					$("#def-description").val("");
-					$("#def-logtype").val("");
-					var calBurned = data.definition.logType * 111;
-					console.log(data.definition.logType);
-					$('#logresult').html(calBurned);
+					
+					var calBurned = data.definition.miles * 100; // changed logType to miles
+					console.log(data.definition.miles);  // changed logType to miles
+					$('#calories').html(calBurned);
+					var date = data.definition.runDate;
+					console.log(date);
+					$('#date').html(date);
 					$('a[href="#log"]').tab("show");
 				});
-
 			},
 
 			fetchAll: function(){
