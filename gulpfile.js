@@ -6,7 +6,7 @@ var javascriptFiles = [
 	'./app.js',
 	'./workouts/define.js',
 	'./workouts/log.js',
-	'./user/auth.js'
+	'./user/auth.js',
 ];
 
 gulp.task('bundle', function(){

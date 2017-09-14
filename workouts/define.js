@@ -19,13 +19,14 @@ $(function() {
 
 				define.done(function(data){
 					WorkoutLog.definition.userDefinitions.push(data.definition);
-					
-					var calBurned = data.definition.miles * 100; // changed logType to miles
-					console.log(data.definition.miles);  // changed logType to miles
+					var calBurned = data.definition.miles * 100;
+					console.log(data.definition.miles);
 					$('#calories').html(calBurned);
 					var date = data.definition.runDate;
 					console.log(date);
 					$('#date').html(date);
+					var pace = data.definition.miles / (data.definition.minutes / 60);
+					$('#pace').html(pace);
 					$('a[href="#log"]').tab("show");
 				});
 			},
