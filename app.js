@@ -46,7 +46,7 @@ $(function(){
       // }
 
       if (target === "#history") {
-         WorkoutLog.log.setHistory();
+         WorkoutLog.definition.setHistory();
       }
    });
 

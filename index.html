@@ -7,13 +7,14 @@
 		<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<script src="./bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 		<title>Running App</title>
 		<style>
-		body{
-			width: 97%;
-			
-			padding-left: 7em;
-		}
+			body{
+				width: 97%;
+				
+				padding-left: 5em;
+			}
 		  	.slidecontainer {
 			    width: 70%;
 			}
@@ -51,6 +52,10 @@
 			#define, #log {
 				width: 40%;
 			}
+			#calories, #date, #pace {
+				font-weight: 700;
+				background-color: yellow;
+			}
 		</style>
 	</head>
 	<body>
@@ -69,6 +74,7 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="home">
 					<h2>The Forrest Log</h2>
+					<h5>An award-winning running app by HOM TANKS inc.</h5>
 					<img src="./images/gump.jpg" alt="Forrest"><br>
 					<br>
 					<div id="forLogin">
@@ -111,7 +117,7 @@
 							<p></p>
 						</div>
 						<div class="col-md-10">
-							<h2>Great job. Review, add a note, and confirm</h2>
+							<h2>Great job!</h2>
 							<img src="./images/gump2.jpg" alt="Forrest">
 						</div>
 						<div class="col-md-1">
@@ -127,14 +133,16 @@
 					<div class="row">
 						<h4>Your pace: <span id='pace'></span> miles per hour</h4>
 					</div>
-					</div>
-					
-					<label>Add some notes</label>
-					<br>
-					<textarea id="notes" rows="3" class="form-control"></textarea>
-					<button class="btn btn-primary" id="log-save">Confirm</button>
-				</div>
+
+					<!-- <div>	
+						<label>Add some notes</label>
+						<br>
+						<textarea id="notes" rows="3" class="form-control"></textarea><br>
+						<button class="btn btn-primary" id="log-save">Confirm</button>
+					</div> -->
+
 				
+				</div>
 				<!-- if 'U' (update) is clicked, it will go to this Div -->
 				<div class="tab-pane fade" id="update-log"> 
 					<h2>Update Run Info</h2>
@@ -150,11 +158,27 @@
 				</div>
 
 				<div class="tab-pane fade" id="history">
-					<h2>Your Forrest Log (history)</h2>	
-					<ul class="list-group" id="history-list">
-					</ul>
+					<h2>Your Forrest Log (history)</h2>
 					<img src="./images/gump3.png" alt="Gump">
 					<h4>Forrest Gump: "Mama says they was my magic shoes. They could take me anywhere."</h4>
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Miles</th>
+								<th>Minutes</th>
+								<th>Pace (mph)</th>
+								<th>Calories</th>
+								<th>Update / Delete</th>
+							</tr>
+						</thead>
+
+						<tbody id="dataTable">
+						</tbody>
+					</table>
+					<br>
+					<hr>
+					<br>
 				</div>
 
 				<div class="tab-pane fade" id="account">
